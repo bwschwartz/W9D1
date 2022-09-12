@@ -1,14 +1,14 @@
-function Game(xDim=150, yDim=150) {
-    this.DIM_X = xDim;
-    this.DIM_Y = yDim;
-    this.NUM_ASTEROIDS = 10;
+function Game() {
+    this.DIM_X = 1000;
+    this.DIM_Y = 600;
+    this.NUM_ASTEROIDS = 4;
     this.asteroids = [];
     this.addAsteroids();
 }
 
 Game.prototype.addAsteroids = function() {
     while (this.asteroids.length < this.NUM_ASTEROIDS) {
-        const asteroid = new Asteroid(this.randomPosition());
+        const asteroid = new Asteroid(this.randomPosition(), this);
         this.asteroids.push(asteroid);
         console.log(`game this refers to: ${this}`)
     }
@@ -31,6 +31,27 @@ Game.prototype.moveObjects = function() {
     for (const asteroid of this.asteroids) {
         asteroid.move();
     }
+}
+
+Game.prototype.wrap = function (pos) {
+    return [pos[0] % this.DIM_X, pos[1] % this.DIM_Y]
+}
+
+
+Game.prototype.checkCollisions = function() {
+  for (let i = 0; i < this.asteroids.length - 1; i++) {
+    for (let j = i+1; j < this.asteroids.length; j ++) {
+        if (this.asteroids[i].isCollidedWith(this.asteroids[j])) {
+            alert("COLLISION!")
+        }
+    }
+  }
+}
+
+Game.prototype.step = function() {
+    this.moveObjects();
+    console.log("test")
+    this.checkCollisions();
 }
 
 module.exports = Game;

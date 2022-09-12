@@ -16,6 +16,7 @@ window.MovingObject = MovingObject;
 window.Asteroid = Asteroid;
 window.Game = Game;
 
+module.exports = canvasEl;
 
 
 

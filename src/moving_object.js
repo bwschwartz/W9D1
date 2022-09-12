@@ -1,9 +1,9 @@
 function MovingObject (options) {
-  console.log("test")
   this.pos = options['pos'];
   this.vel = options['vel'];
   this.radius = options['radius'];
   this.color = options['color'];
+  this.game = options['game']
 }
 
 MovingObject.prototype.draw = function(ctx) {
@@ -14,16 +14,27 @@ MovingObject.prototype.draw = function(ctx) {
 }
 
 MovingObject.prototype.move = function () {
-  this.pos[0] += this.vel[0];
-  this.pos[1] += this.vel[1];
+  
+  const x = this.pos[0] + this.vel[0];
+  const y = this.pos[1] + this.vel[1];
+  this.pos[0] = this.game.wrap([x,y])[0];
+  this.pos[1] = this.game.wrap([x,y])[1];
 }
 
-const mo = new MovingObject({
-  pos: [30, 30],
-  vel: [10, 10],
-  radius: 5,
-  color: "#00FF00"
-});
+MovingObject.prototype.isCollidedWith = function(otherObject) {
+  const distance = Math.sqrt(((this.pos[0] - otherObject.pos[0])**2) + ((this.pos[1] - otherObject.pos[1]) ** 2));
+  const radialSum = this.radius + otherObject.radius;
+  console.log(`distance: ${distance}`)
+  console.log(`radialsum: ${radialSum}`)
+  return distance < radialSum;
+}
 
+
+// const mo = new MovingObject({
+//   pos: [30, 30],
+//   vel: [10, 10],
+//   radius: 5,
+//   color: "#00FF00"
+// });
 
 module.exports = MovingObject;
