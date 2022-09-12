@@ -7,7 +7,6 @@ function GameView (ctx) {
 
 GameView.prototype.start = function() {
   setInterval(this.moveAndDraw.bind(this), 20)
-
 }
 
 GameView.prototype.moveAndDraw = function () {

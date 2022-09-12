@@ -5,8 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
   gameView.start();
 })
 
-console.log("hi from index.js");
-
 const MovingObject = require('./moving_object.js');
 const Asteroid = require('./asteroid.js');
 const Game = require('./game.js');
@@ -16,7 +14,6 @@ window.MovingObject = MovingObject;
 window.Asteroid = Asteroid;
 window.Game = Game;
 
-module.exports = canvasEl;
 
 
 

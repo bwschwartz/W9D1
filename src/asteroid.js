@@ -2,13 +2,13 @@ const Util = require("./util");
 const MovingObject = require('./moving_object')
 
 function Asteroid (pos, game) {
-    this.color = "red"
-    this.radius = 6
-    this.pos = pos
+    this.color = "red";
+    this.pos = pos;
+    this.radius = 20;
     const options = {
         pos: pos,
         vel: Util.randomVec(2),
-        radius: 50,
+        radius: this.radius,
         color: "green",
         game: game
     }
